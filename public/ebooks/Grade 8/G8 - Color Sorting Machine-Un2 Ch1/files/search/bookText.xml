@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Search><pages Count="5"><page Index="1"><![CDATA[UNIT 02         [ Intermediate ]                                           LESSON 01
+                             [ Intermediate ]
+                                                                                        LESSON 01
+             UNIT 02
+                  Chapter 01 : Robotics Domain.                               Function Your System.
+                  Chapter 01 : Robotics Domain.
+                                                                              Function Your System.
+
+             Stepping Stone:
+              Stepping Stone:
+
+
+
+
+                You need to know …                             You will be able to…
+
+
+
+                        Ohm’s Law: Knowledge of                      Wire and connect a color
+                        voltage, current, and                        sensor accurately within an
+                        resistance relationships.                    electrical circuit.
+
+                        How to write and connect                     Connect and control multiple
+                        sensors to a circuit, including              servo motors within a single
+                        understanding sensor                         circuit.
+                        speci cations and outputs.
+                                                                     Test and calibrate the color
+                        How to calibrate and test                    sensor for precise and
+                        sensors for accurate readings.               accurate color detection.
+
+                        How to control servo motors,                 Con gure and power the
+                        including the use of PWM (Pulse              circuit to operate multiple
+                        Width Modulation) signals.                   servo motors and synchronize
+                        how to connect and power                     their movements e ectively.
+                        multiple servos within a circuit.
+                                                                     How to link between the i/p
+                        What a code is. and Arduino                  signals from the sensor and
+                        IDE software.                                the brain then the o/p to the
+                                                                     servo motors.
+                        How to Install libraries
+                        including <servo.h>
+
+
+
+                                                          What could have gone wrong with the
+                                                          electrical system that might cause the
+                                                          machine to fail?
+
+                                                          . ...............................................................................................................................................
+                  let's                                   . ...............................................................................................................................................
+                  let's
+
+                Think                                     How would you troubleshoot and  x
+                Think
+                                                          the electrical problem to get the
+                                                          sorter back up and running?
+
+
+                                                          . ...............................................................................................................................................
+
+                                                          . ...............................................................................................................................................
+
+
+
+
+
+
+
+
+                                                         20]]></page><page Index="2"><![CDATA[Explore
+             Explore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              Collect the following components from the lab to make your color
+              sensor circuit and name each:
+
+
+
+
+
+
+
+
+              . ...............................................................................................................................................
+
+
+
+
+
+
+
+              . ...............................................................................................................................................
+
+
+
+
+
+
+              . ...............................................................................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                   Read about it
+                  Watch it..
+                  Watch it..
+                                                                   Read this search to know more
+                                                                   about color sensors technics:
+                  To understand more
+                                                                   https://circuitdigest.com/microcontroller-projects/
+                  about the connection,                            interfacing-color-sensor-with-arduino
+                  let’s watch this video:                                                      Scan Here!
+
+                                           Scan Here!
+                  https://www.youtube.com/watch?v=cRR5jDKTKno
+
+
+
+
+
+
+
+
+
+
+                                                          21]]></page><page Index="3"><![CDATA[Assessment
+                                 Assessment
+
+
+
+
+
+
+
+
+
+
+            Focus
+            Focus
+
+
+
+
+
+
+             Watch the video and refer to the link to understand how the
+             colour sensor detects and outputs RGB values.
+
+
+             Observe and record the RGB ranges for at least  ve colours as
+             shown in the experiment.
+
+
+             Fill in the table with the Red (R), Green (G), and Blue (B) values
+             for each colour.
+
+
+             Color Sensor RGB Value Table
+
+
+                 Color      Red (R)      Green (G)     Blue (B)
+
+                 Red
+
+
+                 Green
+
+
+                 Blue
+
+                 Yellow
+
+                 Purple
+
+
+
+
+
+
+            Practice
+            Practice
+
+
+
+
+
+            Let’s connect the color sorting sensor
+            to the Arduino.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                         22]]></page><page Index="4"><![CDATA[Connect servos                                                                LESSON 02
+                  Connect servos
+                                                                                                 LESSON 02
+
+
+
+
+
+
+                                                        If the servo motor can control the
+                                                        direction of the conveyor belt, what do
+                                                        you think would happen if it stopped
+                                                        working? How could you design a backup
+                                                        system to ensure that the candies still
+                  let's                                 reach the correct sorting area?
+                  let's
+                                                        . ...............................................................................................................................................
+                Think                                   . ...............................................................................................................................................
+                 Think
+
+                                                        The servo motor relies on sensors to know
+                                                        where to guide the candies. What
+                                                        challenges might arise if the sensors fail
+                                                        to detect the candies properly, and how
+                                                        could the factory prevent or  x this issue?
+
+
+                                                        . ...............................................................................................................................................
+
+                                                        . ...............................................................................................................................................
+
+
+
+
+             Explore
+             Explore
+
+
+
+
+                                  Connect the servo motor with the color sensor on the
+                                  Arduino board.
+
+                                  What challenges might we face in controlling multiple
+                                  servomotors independently?
+
+
+                                  . .............................................................................................................................................................................................
+
+
+
+                                                                        Watch it..
+                                                                        Watch it..
+
+                                                                        Let’s watch the following
+                                                                        video:
+
+
+
+                                                                                                Scan Here!
+                                                                        https://youtu.be/tHOH-bYjR4k?si=Jzih_eAuHloMf_iQ
+
+
+
+
+
+
+
+                                                         23]]></page><page Index="5"><![CDATA[Assessment
+                                 Assessment
+
+
+
+
+
+
+
+
+
+
+
+
+            Practice
+            Practice
+
+
+
+
+
+
+             Now try to attach more than
+
+             one servo to Arduino circuit.
+
+
+
+
+
+
+
+
+
+                                                                                              Name:  . .........................................................................................................................................................................................................
+                  Showcase..                                           After we learned       Ask  . ................................................................................................................................................................................................
+                                                                                              Project:
+                                                                                                     Imagine
+                                                                       what are the parts we
+                                                                       need for our machine,
+                                                                       let’s go back to our   Improve  Plan
+                                                                       EDP paper and add
+                 Adding color sensor                                   these parts to the    Create
+                 to the design.                                        create part..
+
+
+
+
+
+
+                  Now I can…
+
+
+
+
+                           Understand the concept and how to connect a color
+                           sensor in circuit.
+
+
+                           Wire and connect sensor to a circuit, including and
+                           understanding sensor speci cations and outputs.
+
+                           Understanding how to control servo motors, including the use
+                           of PWM (Pulse Width Modulation) signals.
+
+                           How to link between the i/p signals from the sensor and
+                           the brain then the o/p to the servo motors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                         24]]></page></pages></Search>
