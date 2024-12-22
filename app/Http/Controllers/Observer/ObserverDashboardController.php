@@ -19,11 +19,17 @@ use DB;
 
 class ObserverDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $observer = Auth::guard('observer')->user();
-        $observations = Observation::all();
-        return view('pages.observer.observer', compact('observer', 'observations'));
+        $teachers = Teacher::all();
+        if ($request->filled('teacher_id')) {
+            $observations = Observation::where('teacher_id', $request->teacher_id)->get();
+        } else {
+            $observations = Observation::all();
+        }
+
+        return view('pages.observer.observer', compact('teachers', 'observer', 'observations'));
     }
     public function createObservation()
     {
@@ -83,8 +89,9 @@ class ObserverDashboardController extends Controller
             'school_id' => $teacher->school_id,
             'activity' => $request->date,
             'coteacher_id' => $request->coteacher_id,
-            'coteacher_name' => $coteacher->username,
-            'material_id' => null
+            'coteacher_name' => $coteacher->username ?? null, // Fix for coteacher name
+            'material_id' => null,
+            'note' => $request->note,
         ]);
 
         foreach ($request->all() as $key => $value) {
@@ -108,9 +115,77 @@ class ObserverDashboardController extends Controller
     }
     public function view(string $id)
     {
+        $observer = Auth::guard('observer')->user();
+        $headers = ObservationHeader::all();
         $observation = Observation::find($id);
         $answers = ObservationHistory::where('observation_id', $id)->get();
+        return view('pages.observer.view_observation', compact('observer', 'headers', 'observation', 'answers'));
+    }
+    public function report(Request $request)
+    {
+        $teachers = Teacher::all();
+        $observer = Auth::guard('observer')->user();
+        $headers = ObservationHeader::all();
+        $stages = Stage::all();
+        foreach ($headers as $header) {
+            if (!isset($data[$header->id])) {
+                $data[$header->id] = [
+                    'header_id' => $header->id,
+                    'name' => $header->header,
+                    'questions' => [],
+                ];
+            }
+            $questions = ObservationQuestion::where('observation_header_id', $header->id)->get();
+            $headerQuestions = [];
+            foreach ($questions as $question) {
+                if (!isset($headerQuestions[$question->id])) {
+                    $headerQuestions[$question->id] = [
+                        'question_id' => $question->id,
+                        'name' => $question->question,
+                        'avg_rating' => 0,
+                        'max_rating' => $question->max_rate,
+                    ];
+                }
+            }
+            $data[$header->id]['questions'] = $headerQuestions;
+        }
+        // dd($data);
 
-        return view('pages.observer.view_observation', compact('observation', 'answers'));
+        $query = Observation::query();
+
+        if ($request->filled('teacher_id')) {
+            $query->where('teacher_id', $request->teacher_id);
+        }
+        if ($query->get()->count() == 0) {
+            return redirect()->back()->with('error', 'No observations found for teacher: ' . Teacher::find($request->teacher_id)->username);
+        }
+
+        if ($request->filled('stage_id')) {
+            $query->where('stage_id', $request->stage_id);
+        }
+        if ($query->get()->count() == 0) {
+            return redirect()->back()->with('error', 'No observations found for ' . Stage::find($request->stage_id)->name);
+        }
+
+        $observations = $query->pluck('id');
+
+        $obsCount = $observations->count();
+
+
+        // dd($obsCount);
+        $histories = ObservationHistory::whereIn('observation_id', $observations)->get();
+        // dd($history);
+        foreach ($histories as $history) {
+            $headerId = ObservationQuestion::find($history->question_id)->observation_header_id;
+            $data[$headerId]['questions'][$history->question_id]['avg_rating'] += $history->rate;
+        }
+
+        foreach ($data as $header) {
+            foreach ($header['questions'] as $question) {
+                $data[$header['header_id']]['questions'][$question['question_id']]['avg_rating'] = round($data[$header['header_id']]['questions'][$question['question_id']]['avg_rating'] / $obsCount, 2);
+            }
+        }
+
+        return view('pages.observer.observation_report', compact('stages', 'teachers', 'observer', 'headers', 'data'));
     }
 }

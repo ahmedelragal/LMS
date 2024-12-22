@@ -7,6 +7,7 @@ Observer Dashboard
 @php
 $menuItems = [
 ['label' => 'Observations', 'icon' => 'fi fi-rr-table-rows', 'route' => route('observer.dashboard')],
+['label' => 'Observations Report', 'icon' => 'fi fi-rr-table-rows', 'route' => route('observer.report')],
 ];
 @endphp
 
@@ -15,10 +16,25 @@ $menuItems = [
 @endsection
 
 @section('content')
-<div class="p-3 text-[#667085] my-8">
-    <div class="flex justify-between items-center mb-4">
+<div class="p-3 text-[#667085] my-8" style="padding:20px">
+    <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Observations</h1>
-        <a href="{{ route('observer.observation.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Add New Observation</a>
+        <div class="flex" style="justify-content:center; align-items:center;gap:15px">
+            <form id="filter-form" action="{{ route('observer.dashboard') }}" method="GET" enctype="multipart/form-data" class="flex" style="gap:10px;">
+                <div>
+                    <select name="teacher_id" id="teacher_id" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="">All Teachers</option>
+                        @foreach ($teachers as $teacher)
+                        <option value="{{ $teacher->id }}"
+                            {{ request('teacher_id') == $teacher->id ? 'selected' : '' }}>
+                            {{ $teacher->username }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+            </form>
+            <a href="{{ route('observer.observation.create') }}" class="px-4 py-2 text-white rounded-md hover:bg-blue-700" style="background-color:#667085; display:block">Add New Observation</a>
+        </div>
     </div>
 
     @if (session('success'))
@@ -43,8 +59,8 @@ $menuItems = [
                     <th class="border px-4 py-2">Co-Teacher Name</th>
                     <th class="border px-4 py-2">School</th>
                     <th class="border px-4 py-2">Date of Observation</th>
-                    <th class="border px-4 py-2">Note</th>
-                    <th class="border px-4 py-2">Actions</th>
+                    <th class="border px-4 py-2">Comment</th>
+                    <th class="border px-4 py-2" style="width: 15%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,10 +72,11 @@ $menuItems = [
                     <td class="border px-4 py-2">{{ App\Models\School::find($observation->school_id)->name }}</td>
                     <td class="border px-4 py-2">{{ $observation->activity }}</td>
                     <td class="border px-4 py-2">{{ $observation->note }}</td>
-                    <td class="border px-4 py-2">
+                    <td class="border px-4 py-2" style="text-align:center; gap:10px">
 
                         <a href="{{ route('observation.view', $observation->id) }}"
-                            class="btn btn-info">View</a>
+                            class="text-white font-medium py-2 px-4 rounded shadow focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50" style="background-color:#667085">
+                            <i class="fa-solid fa-eye"></i></a>
                         <form action="{{ route('observation.destroy', $observation->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
@@ -82,4 +99,12 @@ $menuItems = [
     </div>
 
 </div>
+@endsection
+
+@section('page_js')
+<script>
+    document.getElementById('teacher_id').addEventListener('change', function() {
+        document.getElementById('filter-form').submit();
+    });
+</script>
 @endsection

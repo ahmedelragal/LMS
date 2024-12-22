@@ -33,6 +33,7 @@ Observer Dashboard
 @php
 $menuItems = [
 ['label' => 'Observations', 'icon' => 'fi fi-rr-table-rows', 'route' => route('observer.dashboard')],
+['label' => 'Observations Report', 'icon' => 'fi fi-rr-table-rows', 'route' => route('observer.report')],
 ];
 @endphp
 
@@ -46,7 +47,7 @@ $menuItems = [
         <form action="{{ route('observation.store') }}" method="GET" enctype="multipart/form-data" class="mb-4 flex" style="gap:10px; padding:10px">
             @csrf
 
-            <div class="questions mb-3" style="max-width: 650%;">
+            <div class="questions mb-3" style="max-width: 65%;">
                 @foreach ($headers as $header)
                 <h1 class="text-lg font-semibold text-[#667085] mb-4" style="font-size:24px">{{$header->header}}</h1>
                 @php
@@ -73,6 +74,14 @@ $menuItems = [
                 </div>
                 @endforeach
                 @endforeach
+                <h1 class="text-lg font-semibold text-[#667085] mb-4" style="font-size:24px">Overall Comments</h1>
+                <h3 class="text-base font-medium text-gray-700 mb-2" style="font-size:18px">- Provide an overall assessment of the teacher's effectiveness in teaching STEAM. Highlight strenghts, areas for improvement, and recommendations for professional development</h3>
+                <textarea
+                    name="note"
+                    placeholder="Enter your comments here..."
+                    class="w-full mb-3 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="4"></textarea>
+
                 <button type="submit" class="mt-2 text-white hover:bg-blue-700 px-4 py-2 rounded-lg" style="background-color: #17253e;">Create Observation</button>
             </div>
             <div class="w-1/3 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-lg">
@@ -94,8 +103,8 @@ $menuItems = [
                     </div>
                     <div class="mb-3">
                         <label for="coteacher" class="block text-sm font-medium text-gray-700">Co-Teacher Username</label>
-                        <select name="coteacher_id" id="coteacher_id" class="w-full p-2 border border-gray-300 rounded" required>
-                            <option value="">Select Co-Teacher</option>
+                        <select name="coteacher_id" id="coteacher_id" class="w-full p-2 border border-gray-300 rounded">
+                            <option value="">None</option>
                             @foreach ($teachers as $teacher)
                             <option value="{{ $teacher->id }}">{{ $teacher->username }}</option>
                             @endforeach

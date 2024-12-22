@@ -81,7 +81,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('images', ImageController::class);
         Route::resource('types', TypeController::class);
         Route::resource('teacher_resources', TeacherResourceController::class);
-        Route::get('reports/homework_report', [ReportController::class, 'homeworkReport'])->name('admin.homework_report');
+        Route::get('reports/assignment_avg_report', [ReportController::class, 'assignmentAvgReport'])->name('admin.assignmentAvgReport');
         Route::get('/get-teachers-school/{schoolId}', [ReportController::class, 'getSchoolTeachers'])->name('getSchoolTeachers');
 
 
@@ -244,6 +244,8 @@ Route::prefix('teacher')->middleware('auth:teacher')->group(function () {
 });
 Route::prefix('observer')->middleware('auth:observer')->group(function () {
     Route::get('/dashboard', [ObserverDashboardController::class, 'index'])->name('observer.dashboard');
+    Route::get('/report', [ObserverDashboardController::class, 'report'])->name('observer.report');
+
     Route::get('/observation/create', [ObserverDashboardController::class, 'createObservation'])->name('observer.observation.create');
     Route::get('/observation/get_school/{teacher_id}', [ObserverDashboardController::class, 'getSchool'])->name('observer.observation.getSchool');
     Route::get('/observation/get_stages/{teacher_id}', [ObserverDashboardController::class, 'getStages'])->name('observer.observation.getStages');
